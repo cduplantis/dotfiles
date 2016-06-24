@@ -20,9 +20,6 @@ set autochdir
 " Enable syntax highlighting.
 syntax on
 
-" Set startup colorscheme.
-colorscheme jelleybeans
-
 " Don't let text wrap when it hits the edge of the screen.
 set nowrap
 
@@ -44,7 +41,7 @@ set encoding=utf-8
 
 " Set font.
 if has('gui_running')
-    set guifont=Sauce\ Code\ Powerline:h12
+    set guifont=Source\ Code\ Powerline:h12
 endif
 
 " Allow vim to recognize file types.
@@ -165,8 +162,42 @@ imap <C-c> <CR><Esc>O
 
 " PLUGIN SETTINGS
 
-" Invoke pathogen to load plugins.
-execute pathogen#infect()
+
+
+"-=-=-= Bundle  =-=-=-
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'nanotech/jellybeans.vim'
+" generators for tmux and shell prompt
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'edkolev/promptline.vim'
+
+Plugin 'kien/ctrlp.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+" Plugin 'tpope/vim-repeat'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+Plugin 'tpope/vim-surround'
+" Plugin 'christoomey/vim-tmux'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Set startup colorscheme.
+colorscheme jellybeans
 
 "-=-=-= localvimrc =-=-=-
 

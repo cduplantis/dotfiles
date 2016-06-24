@@ -1,6 +1,6 @@
 [user]
-  email = alex.ford@codetunnel.com
-  name = Alex Ford
+  email = cduplantis@gmail.com
+  name = Casey Duplantis
 [alias]
   st = status -sb
   ci = commit
@@ -29,7 +29,7 @@
   cmd = `/usr/local/bin/bcomp $LOCAL $REMOTE $BASE $MERGED`
 [core]
   editor = vim
-  excludesfile = /Users/chev/.gitignore_global
+  excludesfile = /Users/cduplantis/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

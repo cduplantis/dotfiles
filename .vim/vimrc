@@ -8,6 +8,10 @@ if has('mouse_sgr')
   set ttymouse=sgr
 endif
 
+" Use Ctrl-, (comma) for map leader
+let mapleader = ","
+
+": Allow backspace to remove lines.
 " Allow backspace to remove lines.
 set backspace=indent,eol,start
 
@@ -20,12 +24,56 @@ set autochdir
 " Enable syntax highlighting.
 syntax on
 
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+  syntax enable
+endif
+
+" setup 256 colors, regardless
+"set t_Co=256
+"set term=screen-256color
+
+" set color column to a little brighter
+set clipboard=unnamed
+
+" Show line numbers by default.
+set number
+set numberwidth=5
+
+set formatoptions-=tc
+set textwidth=80
+" set colorcolumn+=1
+
+" turn on the ruler
+set ruler
+
+" show the command box
+set showcmd
+
 " Don't let text wrap when it hits the edge of the screen.
 set nowrap
+
+" Set softtabstop to 2 spaces.
+set softtabstop=2
+
+" Set shiftwidth to 2 spaces.
+set shiftwidth=2
+
+" Set tabstop to 2 spaces.
+set tabstop=2
+
+" enable shiftround
+" set shiftround
+
+" Set expandtab by default.
+set expandtab
 
 " Don't have vim store backup or swap files.
 set nobackup
 set noswapfile
+set nowritebackup
 
 " Briefly jump cursor to matching brace when typing completion brace.
 set showmatch
@@ -33,8 +81,25 @@ set showmatch
 " Decrease the time it takes to show the matching brace.
 set matchtime=2
 
+" enable incremental search
+set incsearch
 " Show line numbers by default.
 set number
+
+" Highlight all results of a search within the file.
+set hlsearch
+
+" No need to add 'g' to the end of substitute patterns to replace all occurances.
+set gdefault
+
+" Set the vim clipboard to be the system clipboard
+set clipboard=unnamed
+
+" show the last 2 statuses
+set laststatus=2
+
+" limit the history a little
+set history=100
 
 " Set encoding.
 set encoding=utf-8
@@ -45,7 +110,8 @@ if has('gui_running')
 endif
 
 " Allow vim to recognize file types.
-filetype on
+filetype off "on
+"!! turned off for vundle!!
 
 " Allow vim to load plugins related to the detected file type.
 filetype plugin on
@@ -124,6 +190,17 @@ map <Left> 5<C-W><
 map <Up> 5<C-W>+
 map <Down> 5<C-W>-
 
+" optionally, we can just diable the arrow keys
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+
+noremap  <Up>    <NOP>
+noremap  <Down>  <NOP>
+noremap  <Left>  <NOP>
+noremap  <Right> <NOP>
+
 " When pressing enter it will also run :noh to turn off highlights from previous search.
 nnoremap <CR> :noh<CR>
 
@@ -174,12 +251,22 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
+"-=-=-= Solorized color theme =-=-=-
+" Plugin 'altercation/vim-colors-solarized.git'
+" set term=xterm-256color
+" set background=dark
+" let g:solarized_termcolors=256
+" colorscheme solarized
 
+
+"-=-=-= Jellybeans theme =-=-=-
 Plugin 'nanotech/jellybeans.vim'
 " generators for tmux and shell prompt
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'edkolev/promptline.vim'
 
+
+"-=-=-= CTRL-P =-=-=-
 Plugin 'kien/ctrlp.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
@@ -193,18 +280,57 @@ Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
 " Plugin 'christoomey/vim-tmux'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
 
-" Set startup colorscheme.
-colorscheme jellybeans
+"-=-=-= vim-javascript =-=-=-
+Plugin 'pangloss/vim-javascript'        
+
+"-=-=-= vim-javascript-syntax =-=-=-
+Plugin 'jelera/vim-javascript-syntax'   
+
+"-=-=-= vim-indent-guides =-=-=-
+Plugin 'nathanaelkane/vim-indent-guides'
+
+"-=-=-= delimitMate =-=-=-
+Plugin 'Raimondi/delimitMate'           
 
 "-=-=-= localvimrc =-=-=-
 
 " Don't ask when sourcing .lvimrc files.
 let g:localvimrc_ask = 0
 
+"-=-=-= vim-plist =-=-=-
+Plugin 'darfink/vim-plist'
+
+"-=-=-= tslime =-=-=-
+" Plugin 'jgdavey/tslime.vim'
+" vmap <C-c><C-c> <Plug>SendSelectionToTmux
+" nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+" nmap <C-c>r <Plug>SetTmuxVars
+
+"-=-=-= Syntastic  =-=-=-
+Plugin 'scrooloose/syntastic'                
+set statusline+=%#warningmsg#                
+set statusline+=%{SyntasticStatuslineFlag()} 
+set statusline+=%*                           
+let g:syntastic_always_populate_loc_list = 1 
+let g:syntastic_auto_loc_list = 1            
+let g:syntastic_check_on_open = 1            
+let g:syntastic_check_on_wq = 0              
+
+
+"-=-=-= SuperTab  =-=-=-
+Plugin 'ervandew/supertab'
+
+
+"-=-=-= NerdTree  =-=-=-
+Plugin 'scrooloose/nerdtree.git'
+
+
 "-=-=-= AIRLINE/LIGHTLINE/PROMPTLINE =-=-=-
+Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'edkolev/promptline.vim'
+Plugin 'tpope/vim-fugitive'
 
 " Populate powerline symbols.
 "let g:airline_powerline_fonts = 1

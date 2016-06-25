@@ -3,8 +3,8 @@ Session.vim
 .DS_Store
 ## vim Vundle
 # ignore everything
-/vim/.vim/bundle/*
+.vim/bundle/*
 # except Vundle itself
-!/vim/.vim/bundle/Vundle.vim
+!.vim/bundle/Vundle.vim
 
 
